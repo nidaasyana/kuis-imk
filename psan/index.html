@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tampilan Pemesanan Tiket Bus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* General Styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      /* Header */
+      header {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative; /* Penting untuk positioning sidebar di mobile */
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        /* Add this if you want the logo itself to span the full width of its parent */
+        width: 100%;
+      }
+      .none {
+        display: none;
+      }
+
+      .logo a {
+        /* This pushes the h1 to the far right within the flex container */
+        margin-left: auto;
+        margin-right: 0; /* Ensures no extra right margin */
+        font-size: 28px;
+        color: white;
+      }
+
+      /* Link Navigasi Desktop */
+      nav ul.nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex; /* Default: Tampilkan berdampingan di desktop */
+        align-items: center; /* Pusatkan item secara vertikal */
+      }
+
+      nav ul.nav-links li {
+        margin-left: 25px;
+      }
+
+      nav ul.nav-links li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        padding: 5px 0; /* Memberi sedikit padding untuk area hover/klik */
+      }
+
+      nav ul.nav-links li a:hover {
+        color: #ffd700;
+      }
+
+      /* Styling Input Pencarian */
+      .search-item {
+        display: flex;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        overflow: hidden;
+        margin-left: 25px; /* Sesuaikan jarak dari item sebelumnya */
+      }
+
+      .nav-search-input {
+        border: none;
+        background: transparent;
+        padding: 8px 10px;
+        color: white;
+        font-size: 14px;
+        outline: none; /* Hapus outline saat fokus */
+        width: 120px; /* Lebar default input */
+      }
+
+      .nav-search-input::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .nav-search-button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        padding: 8px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+      }
+
+      .nav-search-button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Styling Dropdown */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown .dropbtn {
+        padding-right: 0; /* Hapus padding yang mungkin mengganggu ikon panah */
+        display: flex;
+        align-items: center;
+      }
+
+      .dropdown .dropbtn i {
+        margin-left: 5px;
+        transition: transform 0.3s ease;
+      }
+      .none {
+        display: none;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border-radius: 5px;
+        overflow: hidden; /* Untuk rounded corners pada item dropdown */
+        top: calc(100% + 10px); /* Posisikan di bawah dropbtn dengan sedikit spasi */
+        left: 0;
+      }
+
+      .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left; /* Teks rata kiri */
+        font-weight: normal; /* Override bold dari nav ul li a */
+        transition: background-color 0.3s ease;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #ddd;
+        color: #007bff; /* Warna teks hover */
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block; /* Tampilkan dropdown saat hover */
+      }
+
+      /* Rotasi panah dropdown saat hover */
+      .dropdown:hover .dropbtn i {
+        transform: rotate(180deg);
+      }
+
+      /* Styling Icon Keranjang */
+      nav ul li .fas.fa-shopping-cart {
+        font-size: 20px; /* Ukuran ikon */
+        color: white; /* Warna ikon */
+        padding: 5px 0;
+      }
+
+      nav ul li .fas.fa-shopping-cart:hover {
+        color: #ffd700;
+      }
+
+      /* --- Responsive Design (Mobile) --- */
+      @media (max-width: 768px) {
+        /* Tampilkan tombol hamburger */
+        .menu-toggle {
+          display: flex;
+        }
+        .none {
+          display: flex;
+        }
+
+        .mobile-header {
+          display: flex;
+          justify-content: center; /* Changes from space-between to center */
+          align-items: center;
+          background-color: white;
+          padding: 10px;
+        }
+
+        /* Styling untuk Sidebar */
+        nav ul.nav-links {
+          position: fixed; /* Membuat sidebar tetap di posisinya saat scroll */
+          top: 0;
+          right: -250px; /* Sembunyikan di luar layar (250px ke kanan) */
+          width: 250px; /* Lebar sidebar */
+          height: 100%;
+          background-color: #007bff; /* Warna latar belakang sidebar */
+          flex-direction: column; /* Tumpuk item menu secara vertikal */
+          padding: 60px 0 20px 0; /* Padding atas untuk ruang logo/header */
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4); /* Bayangan untuk efek muncul */
+          transition: right 0.3s ease; /* Transisi saat sidebar muncul/sembunyi */
+          z-index: 12; /* Di atas overlay */
+        }
+
+        /* Kondisi saat sidebar aktif (muncul) */
+        nav ul.nav-links.active {
+          right: 0; /* Geser sidebar masuk ke dalam layar */
+        }
+
+        /* Styling item di dalam sidebar */
+        nav ul.nav-links li {
+          margin: 0; /* Hapus margin kiri yang ada di desktop */
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Garis pemisah antar item */
+        }
+
+        nav ul.nav-links li:last-child {
+          border-bottom: none; /* Hapus garis di item terakhir */
+        }
+
+        nav ul.nav-links li a {
+          padding: 15px 20px; /* Padding untuk area klik yang lebih besar */
+          display: block; /* Buat link mengisi seluruh lebar item */
+          text-align: left; /* Teks di kiri dalam sidebar */
+        }
+
+        /* Penyesuaian di mobile untuk item baru */
+        .search-item {
+          margin: 0;
+          padding: 15px 20px; /* Padding di dalam sidebar */
+          background-color: transparent; /* Hapus background di sidebar */
+          border-radius: 0;
+        }
+
+        .nav-search-input {
+          width: calc(100% - 40px); /* Sesuaikan lebar input di sidebar */
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 5px;
+        }
+
+        .nav-search-button {
+          padding: 8px; /* Sesuaikan padding tombol cari */
+        }
+
+        /* Dropdown di mobile (dalam sidebar) */
+        .dropdown .dropbtn i {
+          /* Tidak perlu rotasi panah di mobile karena diklik, bukan hover */
+          transform: none;
+        }
+
+        .dropdown-content {
+          position: relative; /* Buat dropdown muncul di bawah di sidebar */
+          box-shadow: none; /* Hapus bayangan */
+          top: 0;
+          left: 0;
+          background-color: rgba(0, 0, 0, 0.2); /* Warna latar belakang dropdown di sidebar */
+          width: 100%; /* Lebar penuh */
+          border-radius: 0;
+        }
+
+        .dropdown-content a {
+          padding-left: 40px; /* Beri indentasi untuk item dropdown di sidebar */
+          color: white; /* Warna teks putih */
+        }
+
+        .dropdown-content a:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Icon Keranjang di sidebar */
+        nav ul li .fas.fa-shopping-cart {
+          padding: 15px 20px;
+          display: block;
+          text-align: left;
+        }
+
+        /* Mengatur overflow body saat sidebar terbuka agar konten utama tidak bisa di-scroll */
+        body.no-scroll {
+          overflow: hidden;
+        }
+
+        .mobile-header {
+          display: flex;
+          justify-content: center; /* Changes from space-between to center */
+          align-items: center;
+          background-color: white;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-roboto">
+    <header>
+      <nav>
+        <div class="logo">
+          <h1 style="font-size: 20px; font-weight: bold; color: white">BusGo</h1>
+          <a class="none" href="#"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+              /></svg
+          ></a>
+        </div>
+
+        <ul class="nav-links">
+          <li><a class="none" href="#">Back</a></li>
+          <li><a href="../index.html">Beranda</a></li>
+          <li class="search-item">
+            <input type="text" placeholder="Cari..." class="nav-search-input" />
+            <button class="nav-search-button"><i class="fas fa-search"></i></button>
+          </li>
+          <li class="dropdown">
+            <a href="psan/index.html" class="dropbtn">Pesan Tiket </a>
+          </li>
+
+          <li>
+            <a href="#">Login</a>
+          </li>
+          <li>
+            <a href="#">Daftar</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="mobile-header none">
+      <p class="menu-toggle" aria-label="Toggle navigation">Menu</p>
+    </div>
+
+    <div class="container mx-auto p-4 sm:px-6 lg:px-8">
+      <hr />
+
+      <section class="mb-8 mt-8">
+        <h2 class="text-xl font-bold mb-4">JADWAL BOOKING TICKETKU</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-gray-700" for="keberangkatan">KEBERANGKATAN</label>
+            <input class="w-full border border-gray-300 p-2" id="keberangkatan" type="text" />
+          </div>
+          <div>
+            <label class="block text-gray-700" for="tujuan">TUJUAN</label>
+            <select class="w-full border border-gray-300 p-2" id="tujuan">
+              <option value="jakarta">Jakarta</option>
+              <option value="bandung">Bandung</option>
+              <option value="yogyakarta">Yogyakarta</option>
+              <option value="surabaya">Surabaya</option>
+              <option value="semarang">Semarang</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-gray-700" for="jadwal-keberangkatan">JADWAL KEBERANGKATAN</label>
+            <input class="w-full border border-gray-300 p-2" id="jadwal-keberangkatan" type="text" />
+          </div>
+          <div>
+            <label class="block text-gray-700" for="jadwal-kembali">JADWAL KEMBALI (Optional)</label>
+            <input class="w-full border border-gray-300 p-2" id="jadwal-kembali" type="text" />
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <section class="mb-8 mt-8">
+        <h2 class="text-xl font-bold mb-4">PERSONAL DATA</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-gray-700" for="nama-pertama">NAMA PERTAMA</label>
+            <input class="w-full border border-gray-300 p-2" id="nama-pertama" type="text" />
+          </div>
+          <div>
+            <label class="block text-gray-700" for="nama-akhir">NAMA AKHIR</label>
+            <input class="w-full border border-gray-300 p-2" id="nama-akhir" type="text" />
+          </div>
+          <div>
+            <label class="block text-gray-700" for="alamat-email">ALAMAT EMAIL</label>
+            <input class="w-full border border-gray-300 p-2" id="alamat-email" type="email" />
+          </div>
+          <div>
+            <label class="block text-gray-700" for="verify-email">VERIFY E-MAIL</label>
+            <input class="w-full border border-gray-300 p-2" id="verify-email" type="email" />
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <section class="mb-8 mt-8">
+        <h2 class="text-xl font-bold mb-4">METODE PEMBAYARAN</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-gray-700" for="jenis-bayar">JENIS BAYAR</label>
+            <select class="w-full border border-gray-300 p-2" id="jenis-bayar">
+              <option value="kartu-kredit">Kartu Kredit</option>
+              <option value="transfer-bank">Transfer Bank</option>
+              <option value="e-wallet">E-Wallet</option>
+              <option value="cash">Cash</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-gray-700" for="kode-bayar">KODE BAYAR</label>
+            <input class="w-full border border-gray-300 p-2" id="kode-bayar" type="text" />
+          </div>
+          <div>
+            <label class="block text-gray-700" for="nominal">NOMINAL</label>
+            <input class="w-full border border-gray-300 p-2" id="nominal" type="text" />
+          </div>
+          <div>
+            <label class="block text-gray-700" for="nomor-id">NOMOR ID</label>
+            <input class="w-full border border-gray-300 p-2" id="nomor-id" type="text" />
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <section class="mt-8">
+        <h2 class="text-xl font-bold mb-4 text-center">PILIH BUSMU</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 max-w-6xl mx-auto">
+          <div class="border rounded-md shadow-sm hover:shadow-md p-2 text-center transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 cursor-pointer">
+            <input type="checkbox" id="bus1" class="mb-1" />
+            <label for="bus1" class="block">
+              <img src="../ekonomi.png" alt="Bus 1" class="w-30 h-30 mx-auto object-cover mb-1 rounded" />
+              <p class="text-xs font-medium text-gray-700">Kelas Ekonomi<br />Rp 150.000</p>
+            </label>
+          </div>
+
+          <div class="border rounded-md shadow-sm hover:shadow-md p-2 text-center transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 cursor-pointer">
+            <input type="checkbox" id="bus2" class="mb-1" />
+            <label for="bus2" class="block">
+              <img src="../vip.png" alt="Bus 2" class="w-30 h-30 mx-auto object-cover mb-1 rounded" />
+              <p class="text-xs font-medium text-gray-700">Kelas VIP<br />Rp 200.000</p>
+            </label>
+          </div>
+
+          <div class="border rounded-md shadow-sm hover:shadow-md p-2 text-center transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 cursor-pointer">
+            <input type="checkbox" id="bus3" class="mb-1" />
+            <label for="bus3" class="block">
+              <img src="../eksekutif.png" alt="Bus 3" class="w-30 h-30 mx-auto object-cover mb-1 rounded" />
+              <p class="text-xs font-medium text-gray-700">Kelas Eksekutif<br />Rp 180.000</p>
+            </label>
+          </div>
+
+          <div class="border rounded-md shadow-sm hover:shadow-md p-2 text-center transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 cursor-pointer">
+            <input type="checkbox" id="bus4" class="mb-1" />
+            <label for="bus4" class="block">
+              <img src="../super.png" alt="Bus 4" class="w-30 h-30 mx-auto object-cover mb-1 rounded" />
+              <p class="text-xs font-medium text-gray-700">Kelas Super Eksekutif<br />Rp 400.000</p>
+            </label>
+          </div>
+
+          <div class="border rounded-md shadow-sm hover:shadow-md p-2 text-center transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105 cursor-pointer">
+            <input type="checkbox" id="bus5" class="mb-1" />
+            <label for="bus5" class="block">
+              <img src="../sleeper.png" alt="Bus 5" class="w-30 h-30 mx-auto object-cover mb-1 rounded" />
+              <p class="text-xs font-medium text-gray-700">Sleeper Bus<br />Rp 300.000</p>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex justify-center sm:justify-end mt-6 pr-4">
+          <button onclick="pesanTiket()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow">PESAN SEKARANG</button>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+<script>
+  // --- Navbar Toggle Logic ---
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      menuToggle.classList.toggle("active"); // Untuk animasi hamburger
+    });
+
+    // Opsional: Tutup menu saat link diklik (untuk UX mobile)
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (navLinks.classList.contains("active")) {
+          navLinks.classList.remove("active");
+          menuToggle.classList.remove("active");
+        }
+      });
+    });
+  }
+</script>
