@@ -1,0 +1,802 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative; /* Penting untuk positioning sidebar di mobile */
+}
+.logo {
+  display: flex;
+  align-items: center;
+  /* Add this if you want the logo itself to span the full width of its parent */
+  width: 100%;
+}
+.none {
+  display: none;
+}
+
+.logo a {
+  /* This pushes the h1 to the far right within the flex container */
+  margin-left: auto;
+  margin-right: 0; /* Ensures no extra right margin */
+  font-size: 28px;
+  color: white;
+}
+
+/* Link Navigasi Desktop */
+nav ul.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Default: Tampilkan berdampingan di desktop */
+  align-items: center; /* Pusatkan item secara vertikal */
+}
+
+nav ul.nav-links li {
+  margin-left: 25px;
+}
+
+nav ul.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  padding: 5px 0; /* Memberi sedikit padding untuk area hover/klik */
+}
+
+nav ul.nav-links li a:hover {
+  color: #ffd700;
+}
+
+/* Styling Input Pencarian */
+.search-item {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-left: 25px; /* Sesuaikan jarak dari item sebelumnya */
+}
+
+.nav-search-input {
+  border: none;
+  background: transparent;
+  padding: 8px 10px;
+  color: white;
+  font-size: 14px;
+  outline: none; /* Hapus outline saat fokus */
+  width: 120px; /* Lebar default input */
+}
+
+.nav-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-search-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-search-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Styling Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown .dropbtn {
+  padding-right: 0; /* Hapus padding yang mungkin mengganggu ikon panah */
+  display: flex;
+  align-items: center;
+}
+
+.dropdown .dropbtn i {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+  overflow: hidden; /* Untuk rounded corners pada item dropdown */
+  top: calc(100% + 10px); /* Posisikan di bawah dropbtn dengan sedikit spasi */
+  left: 0;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left; /* Teks rata kiri */
+  font-weight: normal; /* Override bold dari nav ul li a */
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: #007bff; /* Warna teks hover */
+}
+
+.dropdown:hover .dropdown-content {
+  display: block; /* Tampilkan dropdown saat hover */
+}
+
+/* Rotasi panah dropdown saat hover */
+.dropdown:hover .dropbtn i {
+  transform: rotate(180deg);
+}
+
+/* Styling Icon Keranjang */
+nav ul li .fas.fa-shopping-cart {
+  font-size: 20px; /* Ukuran ikon */
+  color: white; /* Warna ikon */
+  padding: 5px 0;
+}
+
+nav ul li .fas.fa-shopping-cart:hover {
+  color: #ffd700;
+}
+
+/* Tombol Menu Toggle (Hamburger) */
+.menu-toggle {
+  display: none; /* Sembunyikan secara default di desktop */
+}
+
+.menu-toggle .hamburger {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/* Efek animasi hamburger saat dibuka menjadi 'X' */
+.menu-toggle.active .hamburger:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active .hamburger:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .hamburger:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Overlay (Latar Belakang Gelap) */
+.overlay {
+  display: none; /* Sembunyikan secara default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Warna gelap transparan */
+  z-index: 10; /* Di bawah sidebar tapi di atas konten utama */
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* --- Responsive Design (Mobile) --- */
+@media (max-width: 768px) {
+  /* Tampilkan tombol hamburger */
+  .menu-toggle {
+    display: flex;
+  }
+  .none {
+    display: flex;
+  }
+
+  .mobile-header {
+    display: flex;
+    justify-content: center; /* Changes from space-between to center */
+    align-items: center;
+    background-color: white;
+  }
+
+  /* Styling untuk Sidebar */
+  nav ul.nav-links {
+    position: fixed; /* Membuat sidebar tetap di posisinya saat scroll */
+    top: 0;
+    right: -250px; /* Sembunyikan di luar layar (250px ke kanan) */
+    width: 250px; /* Lebar sidebar */
+    height: 100%;
+    background-color: #007bff; /* Warna latar belakang sidebar */
+    flex-direction: column; /* Tumpuk item menu secara vertikal */
+    padding: 60px 0 20px 0; /* Padding atas untuk ruang logo/header */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4); /* Bayangan untuk efek muncul */
+    transition: right 0.3s ease; /* Transisi saat sidebar muncul/sembunyi */
+    z-index: 12; /* Di atas overlay */
+  }
+
+  /* Kondisi saat sidebar aktif (muncul) */
+  nav ul.nav-links.active {
+    right: 0; /* Geser sidebar masuk ke dalam layar */
+  }
+
+  /* Styling item di dalam sidebar */
+  nav ul.nav-links li {
+    margin: 0; /* Hapus margin kiri yang ada di desktop */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Garis pemisah antar item */
+  }
+
+  nav ul.nav-links li:last-child {
+    border-bottom: none; /* Hapus garis di item terakhir */
+  }
+
+  nav ul.nav-links li a {
+    padding: 15px 20px; /* Padding untuk area klik yang lebih besar */
+    display: block; /* Buat link mengisi seluruh lebar item */
+    text-align: left; /* Teks di kiri dalam sidebar */
+  }
+
+  /* Penyesuaian di mobile untuk item baru */
+  .search-item {
+    margin: 0;
+    padding: 15px 20px; /* Padding di dalam sidebar */
+    background-color: transparent; /* Hapus background di sidebar */
+    border-radius: 0;
+  }
+
+  .nav-search-input {
+    width: calc(100% - 40px); /* Sesuaikan lebar input di sidebar */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+  }
+
+  .nav-search-button {
+    padding: 8px; /* Sesuaikan padding tombol cari */
+  }
+
+  /* Dropdown di mobile (dalam sidebar) */
+  .dropdown .dropbtn i {
+    /* Tidak perlu rotasi panah di mobile karena diklik, bukan hover */
+    transform: none;
+  }
+
+  .dropdown-content {
+    position: relative; /* Buat dropdown muncul di bawah di sidebar */
+    box-shadow: none; /* Hapus bayangan */
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2); /* Warna latar belakang dropdown di sidebar */
+    width: 100%; /* Lebar penuh */
+    border-radius: 0;
+  }
+
+  .dropdown-content a {
+    padding-left: 40px; /* Beri indentasi untuk item dropdown di sidebar */
+    color: white; /* Warna teks putih */
+  }
+
+  .dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Icon Keranjang di sidebar */
+  nav ul li .fas.fa-shopping-cart {
+    padding: 15px 20px;
+    display: block;
+    text-align: left;
+  }
+
+  /* Mengatur overflow body saat sidebar terbuka agar konten utama tidak bisa di-scroll */
+  body.no-scroll {
+    overflow: hidden;
+  }
+}
+
+/* Hero Section */
+/* ... (CSS yang sudah ada sebelumnya) ... */
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.image-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-content h2 {
+  font-size: 48px;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Styling untuk tombol slider (Prev/Next) */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Background transparan gelap */
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 6; /* Di atas konten hero dan slider */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.slider-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Lebih gelap saat hover */
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
+}
+
+/* ... (CSS yang sudah ada lainnya) ... */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* ... (Media query yang sudah ada sebelumnya) ... */
+
+  .hero {
+    height: 400px;
+  }
+
+  .slider-btn {
+    padding: 10px 15px;
+    font-size: 20px;
+  }
+
+  .prev-btn {
+    left: 10px;
+  }
+
+  .next-btn {
+    right: 10px;
+  }
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #ffd700;
+  color: #007bff; /* Warna teks sesuai warna bus */
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #ffc107;
+}
+
+.btn-secondary {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #0056b3;
+}
+
+/* Booking Form */
+.booking-form-container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: -80px auto 50px auto; /* Pulls it up over the hero section */
+  position: relative;
+  z-index: 10;
+}
+
+.booking-form h3 {
+  text-align: center;
+  color: #007bff; /* Warna judul form */
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"] {
+  width: calc(100% - 20px);
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.booking-form .btn-primary {
+  width: 100%;
+  padding: 15px;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+/* ... (CSS yang sudah ada sebelumnya) ... */
+
+/* Popular Routes / Featured Destinations */
+.popular-routes {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.popular-routes h2 {
+  font-size: 36px;
+  color: #007bff; /* Warna judul section */
+  margin-bottom: 40px;
+}
+
+.route-cards {
+  display: flex;
+  justify-content: center; /* Pusatkan kartu-kartu */
+  flex-wrap: wrap; /* Biarkan kartu melipat ke baris baru jika tidak muat */
+  gap: 15px; /* Mengurangi jarak antar kartu */
+  max-width: 1200px; /* Batasi lebar container */
+  margin: 0 auto; /* Pusatkan container kartu */
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  /* Sesuaikan lebar kartu agar 5 bisa berjajar, hitungan kasar:
+       (100% - (4 * gap)) / 5
+       (1200px - (4 * 15px)) / 5 = (1200 - 60) / 5 = 1140 / 5 = 228px
+       Atau gunakan calc() untuk fleksibilitas lebih: */
+  width: calc(20% - 15px); /* 20% untuk 5 kartu, dikurangi gap */
+  min-width: 200px; /* Lebar minimum agar tidak terlalu kecil */
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px; /* Sedikit kurangi tinggi gambar agar kartu tidak terlalu tinggi */
+  object-fit: cover;
+}
+
+.card h3 {
+  font-size: 20px; /* Sedikit kurangi ukuran font */
+  margin: 15px 15px 10px 15px;
+  color: #007bff;
+  white-space: nowrap; /* Mencegah judul patah baris jika terlalu panjang */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Tambahkan elipsis jika teks terpotong */
+}
+
+.card p {
+  font-size: 16px; /* Sedikit kurangi ukuran font */
+  color: #666;
+  margin: 0 15px 15px 15px; /* Sesuaikan margin bawah */
+}
+
+.card .btn-secondary {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 0 15px 15px 15px;
+  text-align: center;
+  padding: 8px 15px; /* Sesuaikan padding tombol */
+  font-size: 15px; /* Sesuaikan ukuran font tombol */
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+footer ul li {
+  margin-left: 20px;
+}
+
+footer ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+  color: #ffd700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    height: 400px; /* Sesuaikan tinggi hero di mobile */
+  }
+
+  .hero-content h2 {
+    font-size: 36px;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  footer ul {
+    margin-top: 15px;
+  }
+}
+
+/* Footer */
+/* ... (CSS footer yang sudah ada) ... */
+
+/* Responsive Design */
+@media (max-width: 1250px) {
+  /* Sesuaikan breakpoint jika 5 kartu tidak muat */
+  .card {
+    width: calc(33.33% - 15px); /* Untuk 3 kartu per baris */
+  }
+}
+
+@media (max-width: 768px) {
+  /* ... (Media query yang sudah ada sebelumnya) ... */
+
+  .card {
+    width: calc(50% - 15px); /* Untuk 2 kartu per baris */
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 90%; /* Untuk 1 kartu per baris di layar sangat kecil */
+  }
+}
+
+/* ... (CSS yang sudah ada sebelumnya) ... */
+
+/* Comments Section */
+.comments-section {
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.comments-section h2 {
+  font-size: 30px;
+  color: #007bff;
+  margin-bottom: 30px;
+}
+
+.comments-list {
+  max-height: 400px; /* Atur tinggi maksimum container komentar */
+  overflow-y: scroll; /* Aktifkan scroll vertikal */
+  padding-right: 15px; /* Beri sedikit ruang untuk scrollbar */
+  margin: 0 auto;
+  max-width: 800px; /* Lebar maksimal container komentar */
+  text-align: left; /* Kembalikan teks ke kiri dalam list */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05); /* Sedikit bayangan untuk efek scroll */
+  border-radius: 8px;
+  background-color: #fff; /* Latar belakang untuk area scroll */
+}
+
+.comment {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  /* margin-left dan margin-right untuk memberi ruang dari sisi kontainer scroll */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.comment:last-child {
+  margin-bottom: 10px; /* Kurangi margin bawah komentar terakhir di dalam list */
+}
+
+.comment-header {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.comment-header .user {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Hapus styling untuk form komentar karena tidak ada lagi */
+/* .comment-form {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: left;
+    max-width: 600px;
+    margin: 30px auto 0 auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.comment-form h3 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.comment-form .form-group {
+    margin-bottom: 20px;
+}
+
+.comment-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.comment-form .form-group input,
+.comment-form .form-group textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.comment-form .btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    margin-top: 15px;
+} */
+
+/* Responsive for comments section */
+@media (max-width: 768px) {
+  .comments-section {
+    padding: 30px 10px;
+  }
+
+  .comments-list {
+    max-height: 350px; /* Sesuaikan tinggi di mobile */
+  }
+}

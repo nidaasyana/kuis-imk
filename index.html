@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pemesanan Tiket Bus Online</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <h1>BusGo</h1>
+          <a class="none" href="#"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+              /></svg
+          ></a>
+        </div>
+
+        <ul class="nav-links">
+          <li><a class="none" href="#">Back</a></li>
+          <li><a href="#">Beranda</a></li>
+          <li class="search-item">
+            <input type="text" placeholder="Cari..." class="nav-search-input" />
+            <button class="nav-search-button"><i class="fas fa-search"></i></button>
+          </li>
+          <li class="dropdown">
+            <a href="psan/index.html" class="dropbtn">Pesan Tiket <i class="fas fa-caret-down"></i></a>
+          </li>
+
+          <li>
+            <a href="#">Login</a>
+          </li>
+          <li>
+            <a href="#">Daftar</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="mobile-header">
+      <p class="menu-toggle" aria-label="Toggle navigation">Menu</p>
+    </div>
+
+    <main>
+      <section class="hero">
+        <div class="image-slider">
+          <div class="slide active" style="background-image: url('slider-1.png')"></div>
+          <div class="slide" style="background-image: url('slider-2.png')"></div>
+          <div class="slide" style="background-image: url('slider-3.png')"></div>
+        </div>
+        <div class="hero-content">
+          <h2>Perjalanan Nyaman Dimulai dari Sini</h2>
+          <p>Pesan tiket bus antarkota atau antarprovinsi dengan mudah dan cepat.</p>
+          <a href="psan/index.html"><button class="btn-primary">Cari Tiket Bus</button></a>
+        </div>
+        <button class="slider-btn prev-btn">&lt;</button>
+        <button class="slider-btn next-btn">&gt;</button>
+      </section>
+
+      <section class="booking-form-container">
+        <div class="booking-form">
+          <a href="psan/index.html"><h3>Cari Tiket Bus</h3></a>
+
+          <div class="form-group">
+            <label for="origin">Kota Asal:</label>
+            <input type="text" id="origin" placeholder="Contoh: Bandung" required />
+          </div>
+          <div class="form-group">
+            <label for="destination">Kota Tujuan:</label>
+            <input type="text" id="destination" placeholder="Contoh: Surabaya" required />
+          </div>
+          <div class="form-group">
+            <label for="travel-date">Tanggal Keberangkatan:</label>
+            <input type="date" id="travel-date" required />
+          </div>
+          <div class="form-group">
+            <label for="passengers">Jumlah Penumpang:</label>
+            <input type="number" id="passengers" min="1" value="1" required />
+          </div>
+          <button class="btn-primary">Cari Bus</button>
+        </div>
+      </section>
+
+      <section class="popular-routes">
+        <h2>pilihan Bus</h2>
+        <div class="route-cards">
+          <div class="card">
+            <img src="ekonomi.png" alt="Jakarta Bandung Route" />
+            <h3>Kelas Ekonomi</h3>
+            <p>Mulai dari Rp 70.000</p>
+            <a href="psan/index.html"> <button class="btn-secondary">Pesan Sekarang</button></a>
+          </div>
+          <div class="card">
+            <img src="vip.png" alt="Jakarta Bandung Route" />
+            <h3>Kelas VIP</h3>
+            <p>Mulai dari Rp 150.000</p>
+            <a href="psan/index.html"> <button class="btn-secondary">Pesan Sekarang</button></a>
+          </div>
+          <div class="card">
+            <img src="eksekutif.png" alt="Jakarta Bandung Route" />
+            <h3>Kelas Eksekutif</h3>
+            <p>Mulai dari Rp 180.000</p>
+            <a href="psan/index.html"> <button class="btn-secondary">Pesan Sekarang</button></a>
+          </div>
+          <div class="card">
+            <img src="super.png" alt="Surabaya Yogyakarta Route" />
+            <h3>Kelas Super Eksekutif</h3>
+            <p>Mulai dari Rp 350.000</p>
+            <a href="psan/index.html"> <button class="btn-secondary">Pesan Sekarang</button></a>
+          </div>
+          <div class="card">
+            <img src="sleeper.png" alt="Bandung Yogyakarta Route" />
+            <h3>Sleeper Bus</h3>
+            <p>Mulai dari Rp 300.000</p>
+            <a href="psan/index.html"> <button class="btn-secondary">Pesan Sekarang</button></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="comments-section">
+        <h2>Apa Kata Mereka?</h2>
+        <div class="comments-list">
+          <div class="comment">
+            <div class="comment-header"><span class="user">Budi Santoso</span> - <span class="date">15 Maret 2024</span></div>
+            <p>Pelayanan sangat baik, pemesanan mudah dan cepat. Perjalanan dengan BusGo sangat nyaman!</p>
+          </div>
+          <div class="comment">
+            <div class="comment-header"><span class="user">Siti Aminah</span> - <span class="date">20 Maret 2024</span></div>
+            <p>Saya suka sekali dengan pilihan rute yang beragam dan harga yang bersaing. Terima kasih BusGo!</p>
+          </div>
+          <div class="comment">
+            <div class="comment-header"><span class="user">Rudi Hartono</span> - <span class="date">22 Maret 2024</span></div>
+            <p>Busnya bersih dan on-time! Sopir juga ramah. Pasti akan pesan lagi di sini.</p>
+          </div>
+          <div class="comment">
+            <div class="comment-header"><span class="user">Dewi Lestari</span> - <span class="date">25 Maret 2024</span></div>
+            <p>Proses pembatalan mudah, refund cepat. Sangat membantu di saat darurat.</p>
+          </div>
+          <div class="comment">
+            <div class="comment-header"><span class="user">Yoga Pratama</span> - <span class="date">28 Maret 2024</span></div>
+            <p>Harga termurah yang saya temukan untuk rute ini. Kualitas bus juga tidak mengecewakan.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2025 BusGo. Semua Hak Cipta Dilindungi.</p>
+        <ul>
+          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
